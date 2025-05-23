@@ -36,7 +36,7 @@ public class UserEntity extends CommonEntity{
     private ROLE role;
 
     @OneToMany(mappedBy = "hostUser", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonBackReference
     private List<EventEntity> events;
 
 }

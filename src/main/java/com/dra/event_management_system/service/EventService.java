@@ -3,6 +3,8 @@ package com.dra.event_management_system.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,7 @@ public class EventService {
     private final ObjectMapper objectMapper;
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @CacheEvict(value = "events", allEntries = true)
     public EventDto createEvent(EventDto eventData){
         EventEntity eventEntity =  this.objectMapper.convertValue(eventData, EventEntity.class);
 
@@ -42,7 +45,8 @@ public class EventService {
     }
 
     @Transactional
-    @PreAuthorize("@securityService.isHostOrAdminForEvent(#id, authentication)")
+    @PreAuthorize("@securityService.isHostOrAdminForEvent(#id, principal)")
+    @CacheEvict(value = "events", allEntries = true)
     public EventDto updateEvent(UUID id, EventDto eventData){
 
         EventEntity eventEntity = this.eventRepository.findById(id)
@@ -61,7 +65,9 @@ public class EventService {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @Cacheable(value = "events", key = "#filter.date + '-' + #filter.location + '-' + #filter.visibility")
     public List<EventDto> filterEvents(EventFilterRequest filter){
+        System.out.println("CALLLLLLLLLLLLLLLLLLLLLLLLLL-------------------------------");
         Specification<EventEntity> spec = Specification
                                             .where(EventSpecification.hasLocation(filter.getLocation()))
                                             .and(EventSpecification.hasVisibility(filter.getVisibility()))
