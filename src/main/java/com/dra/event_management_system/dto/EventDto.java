@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import com.dra.event_management_system.entity.UserEntity;
-import com.dra.event_management_system.enums.VISIBILITY;
+import com.dra.event_management_system.enums.Visibility;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +20,6 @@ public class EventDto implements Serializable{
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String location;
-    private VISIBILITY visibility;
+    private Visibility visibility;
 
 }

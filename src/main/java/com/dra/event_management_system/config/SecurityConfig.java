@@ -13,7 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.dra.event_management_system.config.filter.JwtAuthFilter;
 import com.dra.event_management_system.exception.CustomAuthenticationEntryPoint;
-import com.dra.event_management_system.exception.ExceptionAdvicer;
 import com.dra.event_management_system.service.AuthService;
 import lombok.RequiredArgsConstructor;
 
@@ -21,8 +20,6 @@ import lombok.RequiredArgsConstructor;
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-
-    private final ExceptionAdvicer exceptionAdvicer;
 
     private final AuthService authService;
     private final JwtAuthFilter jwtAuthFilter;

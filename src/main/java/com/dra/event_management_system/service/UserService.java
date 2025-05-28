@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dra.event_management_system.dto.RegisterRequest;
 import com.dra.event_management_system.dto.UserData;
 import com.dra.event_management_system.entity.UserEntity;
-import com.dra.event_management_system.enums.ROLE;
+import com.dra.event_management_system.enums.Role;
 import com.dra.event_management_system.exception.NotFoundException;
 import com.dra.event_management_system.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,7 +39,7 @@ public class UserService{
         UserEntity userEntity = new UserEntity();
         userEntity.setEmail(registerRequest.getEmail());
         userEntity.setName(registerRequest.getName());
-        userEntity.setRole(ROLE.USER);
+        userEntity.setRole(Role.USER);
         userEntity.setPassword(this.passwordEncoder.encode(registerRequest.getPassword()));
         UserEntity savedUserEntity = this.userRepository.save(userEntity);
         UserData userDto = objectMapper.convertValue(savedUserEntity, UserData.class);

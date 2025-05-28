@@ -2,10 +2,8 @@ package com.dra.event_management_system.entity;
 
 import java.util.List;
 
-import com.dra.event_management_system.enums.ROLE;
+import com.dra.event_management_system.enums.Role;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -33,7 +31,7 @@ public class UserEntity extends CommonEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private ROLE role;
+    private Role role;
 
     @OneToMany(mappedBy = "hostUser", fetch = FetchType.LAZY)
     @JsonBackReference

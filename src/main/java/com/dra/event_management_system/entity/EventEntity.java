@@ -1,12 +1,8 @@
 package com.dra.event_management_system.entity;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
-
-import com.dra.event_management_system.enums.VISIBILITY;
+import com.dra.event_management_system.enums.Visibility;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -46,6 +42,6 @@ public class EventEntity extends CommonEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(name = "visibility")
-    private VISIBILITY visibility;
+    private Visibility visibility;
 
 }

@@ -3,10 +3,9 @@ package com.dra.event_management_system.specification;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.springframework.data.jpa.domain.Specification;
-
 import com.dra.event_management_system.dto.UserData;
 import com.dra.event_management_system.entity.EventEntity;
-import com.dra.event_management_system.enums.VISIBILITY;
+import com.dra.event_management_system.enums.Visibility;
 import com.dra.event_management_system.util.SecurityUtil;
 
 import jakarta.persistence.criteria.Predicate;
@@ -42,7 +41,7 @@ public class EventSpecification {
     public static Specification<EventEntity> hasAccessToEvent() {
         return (root, query, cb) -> {
             UserData authUser = SecurityUtil.getAuthUser();
-            Predicate isPublic = cb.equal(root.get("visibility"), VISIBILITY.PUBLIC.name());
+            Predicate isPublic = cb.equal(root.get("visibility"), Visibility.PUBLIC.name());
             Predicate isOwner = cb.equal(root.get("hostUser").get("id"), authUser.getId());
             return cb.or(isPublic, isOwner);
         };

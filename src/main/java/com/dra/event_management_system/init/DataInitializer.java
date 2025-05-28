@@ -1,12 +1,10 @@
-package com.dra.event_management_system.config;
+package com.dra.event_management_system.init;
 
 import java.util.List;
-import java.util.UUID;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.dra.event_management_system.entity.UserEntity;
-import com.dra.event_management_system.enums.ROLE;
+import com.dra.event_management_system.enums.Role;
 import com.dra.event_management_system.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
@@ -23,8 +21,8 @@ public class DataInitializer {
     @PostConstruct
     public void initUsers(){
         List<InitUser> initUsers = List.of(
-            new InitUser("admin", "admin", "123", ROLE.ADMIN),
-            new InitUser("dhishan", "dhishan@gmail.com", "123456", ROLE.USER)
+            new InitUser("admin", "admin", "123", Role.ADMIN),
+            new InitUser("dhishan", "dhishan@gmail.com", "123456", Role.USER)
         );
 
         for(InitUser user : initUsers){
@@ -46,5 +44,5 @@ class InitUser{
     private String name;
     private String email;
     private String password;
-    private ROLE role;
+    private Role role;
 }
